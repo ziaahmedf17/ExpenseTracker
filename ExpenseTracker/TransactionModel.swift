@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Transaction: Identifiable {
+struct Transaction: Identifiable, Decodable, Hashable {
     let id: Int
     let date: String
     let institution: String
@@ -34,4 +34,8 @@ struct Transaction: Identifiable {
 enum TransactionType: String {
     case debit = "debit"
     case credit = "credit"
+}
+
+struct Category {
+    let id: Int
 }
