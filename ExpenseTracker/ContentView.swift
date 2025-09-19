@@ -16,6 +16,10 @@ struct ContentView: View {
                     Text("Overview")
                         .font(.title2)
                         .bold()
+                    
+                    // MARK: Transacion List
+                    
+                    RecentTransactionList()
                 }
                 .padding()
                 .frame(maxWidth: .infinity)
@@ -36,11 +40,25 @@ struct ContentView: View {
 }
 
 #Preview("Light Mode") {
+    let transactionListVM: TransactionListViewModel = {
+        let transactionListVM = TransactionListViewModel()
+        transactionListVM.transactions = transactionListPreviewData
+        return transactionListVM
+    }()
+    
     ContentView()
+        .environmentObject(transactionListVM)
         .preferredColorScheme(.light)
 }
 
 #Preview("Dark Mode") {
+    let transactionListVM: TransactionListViewModel = {
+        let transactionListVM = TransactionListViewModel()
+        transactionListVM.transactions = transactionListPreviewData
+        return transactionListVM
+    }()
+    
     ContentView()
+        .environmentObject(transactionListVM)
         .preferredColorScheme(.dark)
 }
