@@ -15,10 +15,20 @@ struct TransactionList: View {
             List{
                 // MARK: Transaction Groups
                 
-                ForEach(transactionListVM.groupTransactionsByMonth()){
-                    
+                ForEach(Array(transactionListVM.groupTransactionsByMonth()), id: \.key){ month, transactions in
+                    Section{
+                        // MARK: Transaction List
+                        ForEach(transactions){ transaction in
+                            TransactionRow(transaction: transaction)
+                        }
+                    } header : {
+                        // MARK: Transaction Month
+                        Text(month)
+                    }
+                    .listSectionSeparator(.hidden)
                 }
             }
+            .listStyle(.plain)
         }
         .navigationTitle("Transactions")
         .navigationBarTitleDisplayMode(.inline)
